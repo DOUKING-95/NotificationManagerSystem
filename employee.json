@@ -1,0 +1,17 @@
+{
+  "employees" : [ {
+    "name" : "Dembele",
+    "firstName" : "Seydou",
+    "password" : "demseydou",
+    "email" : "dembeleseydou053@gmail.com",
+    "actif" : true,
+    "suscribe" : false
+  } ],
+  "messages" : [ {
+    "messageId" : "9c097851-5b58-4831-85d8-10437dd98470",
+    "message" : "Yoo",
+    "msgTitle" : "i'm Seydou Dembele ",
+    "senderId" : "Seydou",
+    "receverId" : "malick"
+  } ]
+}
