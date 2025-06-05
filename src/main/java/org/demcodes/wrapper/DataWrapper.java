@@ -8,29 +8,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataWrapper {
-
-    private  static  DataWrapper  dw;
-
-    // Contructeur Privée pour empêcher que le DataWrapper soit instancier
-    private DataWrapper(){};
-    // Appliquer un singleton afin que le DataWrapper  soit instancier une seule fois
-    public static DataWrapper getDataWrapperInstance(){
-        if (dw == null){
-            return new DataWrapper();
-        } else return  dw;
-    };
+    public static DataWrapper instance;
+    private List<Employee> employees  = new ArrayList<>();;
+    private List<Message> messages = new ArrayList<>();;
+    private List<Channel> channels = new ArrayList<>();;
 
 
 
-    private List<Employee> employees = new ArrayList<>();
-    private List<Message> messages = new ArrayList<>();
-    private  List<Channel> channels = new ArrayList<>();
 
-    public List<Employee> getEmployees() { return employees; }
-    public void setEmployees(List<Employee> employees) { this.employees = employees; }
 
-    public List<Message> getMessages() { return messages; }
-    public void setMessages(List<Message> messages) { this.messages = messages; }
+    public static  DataWrapper getInstance() {
+        if (instance == null) {
+            instance = new DataWrapper();
+        }
+        return instance;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public List<Channel> getChannels() {
         return channels;
@@ -40,4 +48,3 @@ public class DataWrapper {
         this.channels = channels;
     }
 }
-

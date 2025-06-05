@@ -22,7 +22,7 @@ public class JsonMessageManagerService {
         try{
             if ( file.exists()){
                 dw = mapper.readValue(file , DataWrapper.class);
-            } else dw = DataWrapper.getDataWrapperInstance();
+            } else dw = DataWrapper.getInstance();
 
             dw.getMessages().add(message);
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, dw);

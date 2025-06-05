@@ -2,6 +2,8 @@ package org.demcodes.Controller;
 
 import com.sun.security.jgss.GSSUtil;
 import org.demcodes.Model.Employee;
+import org.demcodes.Model.Message;
+import org.demcodes.external_service.MailSender;
 
 import java.util.List;
 import java.util.Scanner;
@@ -35,8 +37,26 @@ public class EmployeeService {
     public  static  void suscribeEmployee(Employee employee){};
     public  static  void unsuscribeEmployee(Employee employee){};
 
-    public   Employee login(String email, String password) throws Exception {
+    public  boolean  isSuscribe(String email) throws Exception {
         List<Employee> employeeList = jsonEmployeeManagerService.getAllEmployee();
+        if(employeeList != null){
+            for (Employee employee : employeeList){
+                if(employee.getEmail().equals(email) && employee.getSuscribeStatus()){
+       return  true;
+                }
+                else return  false;
+            }
+        } else {
+            System.out.println("Aucun employé touver lors de la connection d'un employé");
+
+        }
+
+
+        return  false;
+    }
+
+    public   Employee login(String email, String password) throws Exception {
+        List<Employee> employeeList = new JsonEmployeeManagerService().getAllEmployee();
 
         if(employeeList != null){
             for (Employee employee : employeeList){
@@ -51,6 +71,51 @@ public class EmployeeService {
 
         }
         return  null;
+    }
+
+    public static  void setLoginMenu(String senderId) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(" 1::: Pour se désabonné de Infohub");
+        System.out.println(" 2::: Envoyer des messages ");
+        System.out.println(" 3::: Envoyer un message Grouper(NB: Toutes les abonnés le receverons");
+        int employeeCnxChoice = sc.nextInt();
+        switch (employeeCnxChoice){
+            case 1:
+                // unsuscribe methode here
+                break;
+            case 2:
+                List<Employee> employeeList =  new JsonEmployeeManagerService().getAllEmployee();
+                if (employeeList != null){
+                    for(int i = 0; i < employeeList.toArray().length ; i++){
+                        System.out.println(i +":::" + employeeList.get(i).getFirstName() + " " + employeeList.get(i).getName());
+                    }
+                    System.out.println("Donner l'indice de la personne a qui vous voulez enoyez une message ");
+                    int indexDestinateurEmployee = sc.nextInt();
+
+                    String receiverId = employeeList.get(indexDestinateurEmployee).getEmployeeId();
+
+                   Message message = ConsoleMessage.initMessage(senderId, receiverId);
+
+                   new JsonMessageManagerService().saveMessage(message);
+                    MailSender.sendEmail(employeeList.get(indexDestinateurEmployee).getEmail(), message.getMsgTitle(),message.getMessage());
+
+
+                }
+            break;
+            case 3:
+                List<Employee> employees =  new JsonEmployeeManagerService().getAllEmployee();
+                if (employees != null){
+                    for(int i = 0; i < employees.toArray().length ; i++){
+                        Message message = ConsoleMessage.initMessage(senderId, employees.get(i).getEmployeeId());
+                        new JsonMessageManagerService().saveMessage(message);
+                        MailSender.sendEmail(employees.get(i).getEmail(), message.getMsgTitle(),message.getMessage());
+                    }
+                }
+            break;
+
+            default:
+                System.out.println("Merci de choisir parmi les option ci dessus !");
+        }
     }
 
 }

@@ -1,17 +1,39 @@
 {
   "employees" : [ {
-    "name" : "Dembele",
-    "firstName" : "Seydou",
-    "password" : "demseydou",
-    "email" : "dembeleseydou053@gmail.com",
-    "actif" : true,
-    "suscribe" : false
+    "employeeId" : "fae0bc04-3b7e-4455-afd4-6e853627c6cd",
+    "name" : "dembele",
+    "firstName" : "seydou",
+    "password" : "demcodes",
+    "email" : "dem@gmail.com",
+    "suscribeStatus" : true,
+    "actif" : true
+  }, {
+    "employeeId" : "75ae13d3-ccad-44c2-9635-a688636b5875",
+    "name" : "samake",
+    "firstName" : "abdoul",
+    "password" : "doul",
+    "email" : "adoul@gmail.com",
+    "suscribeStatus" : true,
+    "actif" : true
   } ],
   "messages" : [ {
-    "messageId" : "9c097851-5b58-4831-85d8-10437dd98470",
-    "message" : "Yoo",
-    "msgTitle" : "i'm Seydou Dembele ",
-    "senderId" : "Seydou",
-    "receverId" : "malick"
+    "messageId" : "dc446ee6-6233-474c-a944-391f6c05c620",
+    "message" : "Yoo Mec",
+    "msgTitle" : "what's up bro ?",
+    "senderId" : "fae0bc04-3b7e-4455-afd4-6e853627c6cd",
+    "receverId" : "75ae13d3-ccad-44c2-9635-a688636b5875"
+  } ],
+  "channels" : [ {
+    "channelId" : "f518f0c7-4284-44fc-87e9-df5d741ec87b",
+    "channelName" : "DevWeb",
+    "channelSuscriber" : [ ]
+  }, {
+    "channelId" : "35334981-e5c3-450b-9083-7abc487db214",
+    "channelName" : "DevMobile",
+    "channelSuscriber" : [ ]
+  }, {
+    "channelId" : "1f159167-7d2b-4a7f-b687-b08d038094ea",
+    "channelName" : "Design",
+    "channelSuscriber" : [ ]
   } ]
 }

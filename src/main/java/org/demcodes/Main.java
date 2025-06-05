@@ -2,10 +2,12 @@ package org.demcodes;
 
 
 import org.demcodes.Controller.*;
+import org.demcodes.Model.Channel;
 import org.demcodes.Model.Employee;
 import org.demcodes.Model.Message;
 
 import java.sql.SQLOutput;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -14,10 +16,17 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         boolean quit = false;
 
+        List<Channel> channelList = new  JsonChannelManagerService().getAllChannel();
+        if( channelList.isEmpty()){
+           new ChannelService(null, null).defaultChannel();
 
+        }
+
+        System.out.println("Bienvenue sur InfoHub");
+        System.out.println("InfoHub rendre l'information accessible a tous et n\'importe Òu");
         while (!quit){
-            System.out.println("Bienvenue sur InfoHub");
-            System.out.println("InfoHub rendre l'information accessible a tous et n\'importe Òu");
+            System.out.println("=============InfoHub==============");
+            System.out.println();
 
             System.out.println(" 1::: Pour Créer un compte sur InfoHub");
             System.out.println(" 2::: Pour se connecter à  InfoHub");
@@ -38,8 +47,17 @@ public class Main {
                     int channelChoice = sc.nextInt();
                     switch (channelChoice){
                         case 1:
+                            System.out.println(employee);
                             new JsonEmployeeManagerService().saveEmployee(employee);
+                           // List<Channel> channels =  new JsonChannelManagerService().getAllChannel();
+                          //  for(Channel channel : channels ){
+                         //       new ChannelService(null, null).addToChannelMembers(channel.getChannelId(),employee.getEmployeeId());
+                          //  }
                             System.out.println(" ========== Bienvenue sur InfoHub ===========");
+                            System.out.println();
+                           // System.out.println("Voici les chaines auquels ou abonnée sur InfoHub");
+                          //  channels.forEach((channel -> System.out.println(channel.getChannelName())));
+
                             break;
                         case 2:
                             break;
@@ -47,33 +65,35 @@ public class Main {
                             System.out.println("Merci de choisir parmi  l\'option 1 ou 2");
                     }
 
-
                     break;
                 case 2:
-                    //  connexion methode here
-
+                    System.out.println("Donner votre Email");
+                    sc.nextLine(); // Consomme le \n restant
                     String email = sc.nextLine();
+
+                    System.out.println("Donner votre mot de passe ");
                     String password = sc.nextLine();
                     Employee currentEmployee =  new EmployeeService(null).login(email, password);
                    if(currentEmployee != null){
-                       System.out.println(" 1::: Pour se désabonné de Infohub");
-                       int employeeCnxChoice = sc.nextInt();
-                       switch (employeeCnxChoice){
-                           case 1:
-                               // unsuscribe methode here
-                               break;
-                           default:
-                               System.out.println("Merci de choisir parmi les option ci dessus !");
-                       }
+                      EmployeeService.setLoginMenu(currentEmployee.getEmployeeId());
                    }
-
+                    System.out.println("Erreur de connecxion : Merci de verifier vos identifiants");
                     break;
                 case 3:
-                    // Verifier qu'un employe est bien Abonné
+
+                    String employeeEmail = sc.nextLine();
+                   boolean suscribtionResult = new EmployeeService(null).isSuscribe(employeeEmail);
+                   if(suscribtionResult) System.out.println("Sans surprise c\'est bien un membre de InfoHub, Merci pour la fidélité");
+                   else {
+                       System.out.println("Ooops vous n\'êtes pas abonné a InfoHub , Merci de vous abonné !");
+                   }
                     break;
                 case  4:
-                    //Voir la liste de Abonnés
-                    new JsonEmployeeManagerService().getAllEmployee();
+
+                   List<Employee> employees = new JsonEmployeeManagerService().getAllEmployee();
+                    for (int i = 0; i < employees.size(); i++) {
+                        System.out.println("Index: " + i + ", : " + employees.get(i).getFirstName() + " " + employees.get(i).getName());
+                    }
                     break;
                 case 5:
                     // Retirer le employe de InfoHub
@@ -87,9 +107,6 @@ public class Main {
 
             }
         }
-
-
-
 
     }
 }

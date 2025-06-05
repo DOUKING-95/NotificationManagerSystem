@@ -27,20 +27,30 @@ public class ChannelService {
     }
 
 
-    public List<Channel> defaultChannel(){
+    public void   defaultChannel(){
         Channel channel1 = new Channel(UUID.randomUUID().toString(), "DevWeb");
         Channel channel2 = new Channel(UUID.randomUUID().toString(), "DevMobile");
         Channel channel3 = new Channel(UUID.randomUUID().toString(), "Design");
-        return  List.of(channel1, channel2, channel3);
+        List<Channel> channels = List.of(channel1, channel2, channel3);
+        for(Channel channelData : channels){
+            new JsonChannelManagerService().saveChannel(channelData);
+        }
+        return ;
 
     }
 
-    public   void  addToChannelMembers(String channelId, String employeeId){
+    public   void  addToChannelMembers(String channelId, String employeeId) throws Exception {
+        List<Channel> channels =  new JsonChannelManagerService().getAllChannel();
 
+        if(channels != null){
+            for(Channel channel1 : channels){
+                if (channel1.getChannelId().equals(channelId)){
+                    channel1.getChannelSuscriber().add(employeeId);
+                }
+                new JsonChannelManagerService().updateChannel(channel1.getChannelId(),channel1);
 
-
-
-
+            }
+        }
 
     }
 

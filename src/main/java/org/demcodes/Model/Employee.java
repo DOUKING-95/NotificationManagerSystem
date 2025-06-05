@@ -22,6 +22,7 @@ public class Employee {
         this.password = password;
         this.isActif = true;
         this.email = email;
+        this.isSuscribe = true;
 
     }
 
@@ -73,11 +74,11 @@ public class Employee {
         this.email = email;
     }
 
-    public boolean isSuscribe() {
+    public boolean getSuscribeStatus() {
         return isSuscribe;
     }
 
-    public void setSuscribe(boolean suscribe) {
+    public void setSuscribeStatus(boolean suscribe) {
         isSuscribe = suscribe;
     }
 String employeeId;
