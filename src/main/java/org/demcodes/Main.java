@@ -5,8 +5,8 @@ import org.demcodes.Controller.*;
 import org.demcodes.Model.Channel;
 import org.demcodes.Model.Employee;
 import org.demcodes.Model.Message;
+import org.demcodes.View.MenuInfoHub;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,21 +19,10 @@ public class Main {
         List<Channel> channelList = new  JsonChannelManagerService().getAllChannel();
         if( channelList.isEmpty()){
            new ChannelService(null, null).defaultChannel();
-
         }
-
-        System.out.println("Bienvenue sur InfoHub");
-        System.out.println("InfoHub rendre l'information accessible a tous et n\'importe Òu");
+        MenuInfoHub.welcomeMsg();
         while (!quit){
-            System.out.println("=============InfoHub==============");
-            System.out.println();
-
-            System.out.println(" 1::: Pour Créer un compte sur InfoHub");
-            System.out.println(" 2::: Pour se connecter à  InfoHub");
-            System.out.println(" 3::: Pour verifier que un Employé est abonné a InfoHub");
-            System.out.println(" 4::: Pour voir la liste de employés sur InfoHub Appuyez ");
-            System.out.println(" 5::: Pour  rétirer un Employé");
-
+            MenuInfoHub.userMenu();
 
             int choice =   sc.nextInt();
 
@@ -41,9 +30,7 @@ public class Main {
                 case 1:
                     Employee employee =  EmployeeService.initEmployee();
 
-                    System.out.println("Merci de choisir :");
-                    System.out.println(" 1::: Pour être ajouter a InfoHub et recevoir des messages ");
-                    System.out.println(" 2::: Pour Ignore, Notez que avec cette option aucun  de vous données n'est sauvegarder ! Merci ");
+                   MenuInfoHub.subscribeChoiceMenu();
                     int channelChoice = sc.nextInt();
                     switch (channelChoice){
                         case 1:
@@ -67,10 +54,10 @@ public class Main {
 
                     break;
                 case 2:
-                    System.out.println("Donner votre Email");
-                    sc.nextLine(); // Consomme le \n restant
-                    String email = sc.nextLine();
 
+                    System.out.println("Donner votre Email");
+                    sc.nextLine();
+                    String email = sc.nextLine();
                     System.out.println("Donner votre mot de passe ");
                     String password = sc.nextLine();
                     Employee currentEmployee =  new EmployeeService(null).login(email, password);
@@ -96,9 +83,6 @@ public class Main {
                     }
                     break;
                 case 5:
-                    // Retirer le employe de InfoHub
-                    break;
-                case 6:
                     quit = true;
                     break;
 

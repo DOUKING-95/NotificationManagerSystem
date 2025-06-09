@@ -7,16 +7,31 @@ import org.demcodes.Model.Message;
 import java.util.Scanner;
 import java.util.UUID;
 
+
+/**
+ * Class ConsoleMessage qui gère les toutes méthodes sur  les services de Massage
+ * */
 public class ConsoleMessage extends Message implements MessageI {
     public ConsoleMessage(String messageId, String message, String msgTitle, String senderId, String receiverId) {
         super(messageId, message, msgTitle, senderId, receiverId);
     }
 
+
+    /**
+     * Méthode send implementer depuis le interface MessageI
+     * */
     @Override
     public void send() {
+        //TODO: Appler la classe EmailSender ici
 
     }
 
+
+/**
+ *Méthode pour initier les Messages
+ * @Param: senderId: pour l'id de sender
+ * @Param: receiverId: pour l'id  du receiver
+ * */
     public  static Message initMessage(String senderId, String receiverId){
         String messageId =  UUID.randomUUID().toString();
         Scanner sc = new Scanner(System.in);

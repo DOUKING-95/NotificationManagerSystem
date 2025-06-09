@@ -18,6 +18,9 @@ public class JsonChannelManagerService {
     private File file = new File("employee.json");
 
 
+    /**
+     * Méthode pour sauvegarder les Chaines  en base de donnée
+     * */
     public    void  saveChannel(Channel channel){
 
         try{
@@ -35,22 +38,25 @@ public class JsonChannelManagerService {
 
     };
 
+/**
 
+ * Cette permet de mettre a jour la chaine si employé ajoute a InfoHub
+ * juste en ajoutant son id a la liste des  employés de la chaine
+  */
     public    void updateChannel(String  channelId, Channel newChannel) throws Exception {
         List<Channel> channels =  new JsonChannelManagerService().getAllChannel();
 
         if(channels != null){
-            for(Channel oldChannel : channels){
-                if (oldChannel.getChannelId().equals(channelId)){
-                    oldChannel = newChannel;
-
+            for (int i = 0; i < channels.size(); i++) {
+                if (channels.get(i).getChannelId().equals(channelId)) {
+                    channels.set(i, newChannel);
+                    break;
                 }
-
             }
             try{
                 if(file.exists()){
                     dw =  DataWrapper.getInstance();
-                    dw.getChannels().addAll(channels);
+                    dw.setChannels(channels);
                     mapper.writerWithDefaultPrettyPrinter().writeValue(file,dw);
 
                 }
@@ -73,6 +79,9 @@ public class JsonChannelManagerService {
 
     };
 
+    /**
+     * Cette methode permet d'obtenir la liste des chaines de notre Service d'information
+     */
     public List<Channel> getAllChannel() throws  Exception{
         try {
             if (file.exists()) {

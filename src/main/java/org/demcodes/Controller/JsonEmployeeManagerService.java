@@ -20,7 +20,9 @@ public class JsonEmployeeManagerService {
     private DataWrapper dw ;
     private File file = new File("employee.json");
 
-
+    /**
+     * Méthode pour sauvegarder les Employé en base de donnée
+     * */
     public void saveEmployee(Employee employee) {
         System.out.println("Chemin du fichier: " + file.getAbsolutePath());
 
@@ -69,7 +71,9 @@ public class JsonEmployeeManagerService {
         }
     }
 
-
+    /**
+     * Méthode pour modifier un Employé en base de donnée
+     * */
     public    void updateEmployee(String employeeId, Employee employee) throws Exception {
 
         List<Employee> employees = getAllEmployee();
@@ -108,17 +112,23 @@ public class JsonEmployeeManagerService {
      * Supprime un employé du fichier JSON basé sur son ID
      * @param employeeId L'ID de l'employé à supprimer
      */
+
+
+
+    /**
+     * Méthode pour Supprimer un Employé en base de donnée
+     * */
     public void removeEmployee(String employeeId) {
         System.out.println("Chemin du fichier: " + file.getAbsolutePath());
 
         ObjectMapper mapper = new ObjectMapper();
+
         // Configuration identique à saveEmployee
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         mapper.configure(SerializationFeature.WRITE_SELF_REFERENCES_AS_NULL, true);
 
         try {
-
-
+            
             if (file.exists() && file.length() > 0) {
                 System.out.println("Lecture du fichier existant...");
                 dw = mapper.readValue(file, DataWrapper.class);
@@ -130,7 +140,7 @@ public class JsonEmployeeManagerService {
 
             System.out.println("Employés avant suppression: " + dw.getEmployees().size());
 
-            // Supprime l'employé s'il existe
+
             boolean removed = dw.getEmployees().removeIf(
                     e -> e.getEmployeeId().equals(employeeId)
             );
@@ -158,6 +168,9 @@ public class JsonEmployeeManagerService {
 
     };
 
+    /**
+     * Méthode pour Récupérer les Employés en base de donnée
+     * */
     public List<Employee> getAllEmployee() throws Exception {
         try {
             if (file.exists()) {

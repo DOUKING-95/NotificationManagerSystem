@@ -12,7 +12,7 @@
     "name" : "samake",
     "firstName" : "abdoul",
     "password" : "doul",
-    "email" : "adoul@gmail.com",
+    "email" : "samabdoul03@gmail.com",
     "suscribeStatus" : true,
     "actif" : true
   } ],
@@ -20,6 +20,18 @@
     "messageId" : "dc446ee6-6233-474c-a944-391f6c05c620",
     "message" : "Yoo Mec",
     "msgTitle" : "what's up bro ?",
+    "senderId" : "fae0bc04-3b7e-4455-afd4-6e853627c6cd",
+    "receverId" : "75ae13d3-ccad-44c2-9635-a688636b5875"
+  }, {
+    "messageId" : "4dcdcee0-8a8f-4ed9-b138-dda2102896f9",
+    "message" : "Fête",
+    "msgTitle" : "Demain c'est le fête ",
+    "senderId" : "fae0bc04-3b7e-4455-afd4-6e853627c6cd",
+    "receverId" : "75ae13d3-ccad-44c2-9635-a688636b5875"
+  }, {
+    "messageId" : "9412da57-6eb8-42d9-8464-16a47278596e",
+    "message" : "Fete ",
+    "msgTitle" : "je suis seydou dembele ",
     "senderId" : "fae0bc04-3b7e-4455-afd4-6e853627c6cd",
     "receverId" : "75ae13d3-ccad-44c2-9635-a688636b5875"
   } ],

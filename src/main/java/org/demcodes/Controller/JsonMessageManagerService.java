@@ -9,6 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+
+/**
+ * Classe JsonMessageManagerService qui gère toute les requêtes de la base de données
+ * à savoir les lectures et écritures
+ * */
 public class JsonMessageManagerService {
 
 
@@ -17,6 +22,10 @@ public class JsonMessageManagerService {
     private File file = new File("employee.json");
 
 
+
+    /**
+     * Méthode pour sauvegarder les Messages en base de donnée
+     * */
     public    void  saveMessage(Message message){
 
         try{
@@ -44,7 +53,9 @@ public class JsonMessageManagerService {
     public    void getMessageById(Long messageId){
 
     };
-
+    /**
+     * Méthode pour Récupérer les Messages en base de donnée
+     * */
     public List<Message> getAllMassage() throws  Exception{
 
         return  null;

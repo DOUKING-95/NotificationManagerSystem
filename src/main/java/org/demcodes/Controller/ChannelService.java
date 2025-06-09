@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
+
+/**
+ * Class ChannelService pour gérer les serices sur Chaines
+ * */
 public class ChannelService {
 
     private JsonChannelManagerService channelJsonManager;
@@ -17,7 +21,9 @@ public class ChannelService {
         this.channel = channel;
 
     }
-
+/**
+ * Cette méthode aura pour but de mettre de permettre au employé de pouvoir créer de chaine
+ * */
     public  static Channel initEmployee(){
         Scanner sc = new Scanner(System.in);
         String channelId = UUID.randomUUID().toString();
@@ -26,7 +32,9 @@ public class ChannelService {
         return  new Channel( channelId,channelName);
     }
 
-
+/**
+ * Le methode defaultChannel permet de initialiser les chaine par defaut de serice InfoHub
+ * */
     public void   defaultChannel(){
         Channel channel1 = new Channel(UUID.randomUUID().toString(), "DevWeb");
         Channel channel2 = new Channel(UUID.randomUUID().toString(), "DevMobile");
@@ -39,6 +47,12 @@ public class ChannelService {
 
     }
 
+    /**
+     * Methode pour ajouter une employé a une chaine
+     *
+     * @param channelId L'identifiant de la chaîne.
+     * @param employeeId L'identifiant de l'employé à ajouter.
+     * */
     public   void  addToChannelMembers(String channelId, String employeeId) throws Exception {
         List<Channel> channels =  new JsonChannelManagerService().getAllChannel();
 
@@ -53,7 +67,9 @@ public class ChannelService {
         }
 
     }
-
+/**
+ * Méthode qui aura pour but de supprimer un employé de la chaine
+ * */
     public  static  void removeToChannelMembers(String channelId, String employeeId){
 
     }
